@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TENFOUR | Creative Production Team</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="noise-overlay"></div>
+
+    <nav class="navbar">
+        <span class="brand-mono">TENFOUR</span>
+        <a href="mailto:tenfour.work@gmail.com" class="nav-cta">Get in Touch</a>
+    </nav>
+
+    <!-- Hero Section -->
+        <section class="hero">
+            <!-- Film Slate Metadata Corner Anchors -->
+            <div class="hero-metadata top-left">SYS // BRDCST_04</div>
+            <div class="hero-metadata top-right" id="liveTimecode">00:00:00:00</div>
+            <div class="hero-metadata bottom-left">FPS // 23.976</div>
+            <div class="hero-metadata bottom-right">ASPECT // 2.39:1</div>
+
+            <div class="hero-content">
+                <img src="tenfour-logo.png" alt="tenfour logo" class="hero-logo">
+                <h1 class="tagline">
+                    <span class="reveal-wrapper"><span class="reveal-text">WE DON'T CHASE VIEWS.</span></span>
+                    <br>
+                    <span class="reveal-wrapper"><span class="reveal-text delay-1">WE BUILD THEM.</span></span>
+                </h1>
+            </div>
+            <div class="scroll-indicator">↓ SCROLL</div>
+        </section>
+
+    <section class="manifesto">
+        <p class="statement">CREATORS • ARTISTS • BRANDS</p>
+        <h2 class="sub-statement">BUILT, NOT BRAGGED.</h2>
+    </section>
+
+    <section class="portfolio">
+        <div class="grid-container">
+            
+            <div class="portfolio-item" data-video-path="videos/jobs.mp4">
+                <div class="thumbnail-wrapper">
+                    <img class="thumbnail" src="https://img.youtube.com/vi/j84-IvequnI/maxresdefault.jpg" alt="Video thumbnail">
+                    <div class="thumbnail-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <h3 class="glitch-hover">WE LEFT OUR JOBS FOR THIS</h3>
+                    <p>Behind the Scenes / Sony FX3 & FX6</p>
+                </div>
+            </div>
+
+            <div class="portfolio-item" data-video-path="videos/japan.mp4">
+                <div class="thumbnail-wrapper">
+                    <img class="thumbnail" src="https://img.youtube.com/vi/wSz2qOWI9Tc/maxresdefault.jpg" alt="Video thumbnail">
+                    <div class="thumbnail-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <h3 class="glitch-hover">WE GOT INVITED TO JAPAN</h3>
+                    <p>Remote Production Experiment / Discord Directed</p>
+                </div>
+            </div>
+            
+            <div class="portfolio-item" data-video-path="videos/hanami.mp4">
+                <div class="thumbnail-wrapper">
+                    <img class="thumbnail" src="https://img.youtube.com/vi/YQ_hWJ4BzRU/sddefault.jpg" alt="Hanami video thumbnail">
+                    <div class="thumbnail-overlay"></div>
+                </div>
+                <div class="project-info">
+                    <h3 class="glitch-hover">HANAMI</h3>
+                    <p>Cinematic Visualizer / Japan Edit</p>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- About Split Section -->
+    <section class="about-split">
+        <div class="split-container">
+            <!-- Left Side: Image -->
+            <div class="split-left">
+                <div class="image-frame">
+                    <img src="images/team.jpg" alt="TENFOUR Team" class="team-img">
+                </div>
+            </div>
+            <!-- Right Side: Clean Copy -->
+            <div class="split-right">
+                <div class="about-content">
+                    <span class="section-tag">01 // THE MEANING</span>
+                    <h2 class="split-title">MESSAGE RECEIVED.</h2>
+                    <p class="split-text">
+                        "Ten-four" is more than a radio code. It's a definitive acknowledgement that the signal was heard, understood, and is being executed. We take your vision, cut out the noise, and deliver it raw.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Split Section 2 (Alternating Stack: Text Left / Video Right) -->
+    <section class="about-split alt-stack">
+        <div class="split-container">
+            <!-- Left Side: Clean Manifesto Copy -->
+            <div class="split-left">
+                <div class="about-content">
+                    <span class="section-tag">02 // THE WARM-UP</span>
+                    <h2 class="split-title">THE WORK WILL MAKE ITS OWN NOISE.</h2>
+                    <p class="split-text bold-lead">
+                        tenfour — Year 1: the warm-up phase.
+                    </p>
+                    <p class="split-text">
+                        tenfour is a collective built like we’ve been here longer than we have. We’re not here to introduce ourselves — the work will make its own noise.
+                    </p>
+                </div>
+            </div>
+            <!-- Right Side: Silent Looping Video Element -->
+            <div class="split-right">
+                <div class="image-frame video-frame">
+                    <!-- TARGET THE NEW CLIPS HERE -->
+                    <video class="showcase-loop" autoplay loop muted playsinline>
+                        <source src="videos/introtrim.mp4" type="video/mp4">
+                    </video>
+                    <div class="thumbnail-overlay"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Let's make something raw.</p>
+        <a href="mailto:tenfour.work@gmail.com" class="email-link">tenfour.work@gmail.com</a>
+    </footer>
+
+    <div class="lightbox" id="videoLightbox">
+        <button class="close-lightbox" aria-label="Close video">&times;</button>
+        <div class="lightbox-content">
+            <video id="lightboxPlayer" controls autoplay playsinline></video>
+        </div>
+    </div>
+
+    <div class="custom-cursor" id="customCursor"></div>
+    <div class="custom-cursor-follower" id="cursorFollower"><span class="follower-text">PLAY</span></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

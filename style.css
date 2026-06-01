@@ -1,0 +1,1109 @@
+
+/* ==========================================================================
+   1. GLOBAL RESETS & PALETTE DEFINITIONS
+   ========================================================================== */
+:root {
+    --bg-color: #0a0a0a;
+    --text-color: #ffffff;
+    --text-muted: #707070;
+    --font-sans: 'Helvetica Neue', Arial, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Clear default OS cursor so custom physics node tracks exclusively */
+html, body, a, button, .portfolio-item {
+    cursor: none !important;
+}
+
+/* ==========================================================================
+   2. GRANULAR BRAND TEXTURING (FILM GRAIN)
+   ========================================================================== */
+.noise-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* ==========================================================================
+   3. NAVIGATION UI
+   ========================================================================== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 5%;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+}
+
+.brand-mono {
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+
+.nav-cta {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--text-color);
+    padding-bottom: 2px;
+    transition: opacity 0.3s ease;
+}
+
+.nav-cta:hover { 
+    opacity: 0.6; 
+}
+
+/* ==========================================================================
+   4. TITLE REVEAL ENGINES (HERO MASKING)
+   ========================================================================== */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 20px;
+    background: radial-gradient(circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 100%), #0a0a0a;
+    transition: background 0.1s ease-out;
+}
+
+.hero-metadata {
+    position: absolute;
+    font-family: monospace;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    opacity: 0.4;
+    text-transform: uppercase;
+}
+
+.hero-metadata.top-left     { top: 40px; left: 5%; }
+.hero-metadata.top-right    { top: 40px; right: 5%; }
+.hero-metadata.bottom-left  { bottom: 40px; left: 5%; }
+.hero-metadata.bottom-right { bottom: 40px; right: 5%; }
+
+.hero-logo {
+    max-width: 280px;
+    height: auto;
+    margin-bottom: 40px;
+    mix-blend-mode: screen;
+}
+
+.tagline {
+    font-size: clamp(1.8rem, 4vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.2;
+}
+
+.reveal-wrapper {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+}
+
+.reveal-text {
+    display: inline-block;
+    transform: translateY(100%);
+    animation: revealUp 1.2s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.delay-1 {
+    animation-delay: 0.2s;
+}
+
+@keyframes revealUp {
+    0% { transform: translateY(100%); }
+    100% { transform: translateY(0); }
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   5. BRAND MANIFESTO BRANDING
+   ========================================================================== */
+.manifesto {
+    padding: 140px 5%;
+    text-align: center;
+    border-top: 1px solid #1a1a1a;
+}
+
+.statement {
+    font-size: 0.85rem;
+    letter-spacing: 6px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+.sub-statement {
+    font-size: clamp(2rem, 6vw, 5rem);
+    font-weight: 900;
+    letter-spacing: -2px;
+}
+
+/* ==========================================================================
+   6. PORTFOLIO MEDIA GRID (LOCKED 2-COLUMN ROWS)
+   ========================================================================== */
+.portfolio {
+    padding: 0 5% 140px 5%;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Enforces exactly two elements side-by-side */
+    gap: 80px 50px;
+}
+
+/* Editorial layout stagger for desktop viewports */
+@media (min-width: 769px) {
+    .portfolio-item:nth-child(even) {
+        transform: translateY(60px);
+    }
+}
+
+/* Collapse layout parameters cleanly on mobile devices */
+@media (max-width: 600px) {
+    .grid-container { 
+        grid-template-columns: 1fr; 
+    }
+    .portfolio-item:nth-child(even) {
+        transform: none;
+    }
+}
+
+.portfolio-item {
+    display: block;
+}
+
+.thumbnail-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #111;
+    overflow: hidden;
+}
+
+.thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.thumbnail-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 5;
+    transition: background-color 0.3s ease;
+}
+
+.portfolio-item:hover .thumbnail {
+    transform: scale(1.04);
+}
+
+.portfolio-item:hover .thumbnail-overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.project-info {
+    margin-top: 15px;
+}
+
+@media (min-width: 769px) {
+    .portfolio-item:nth-child(even) .project-info {
+        margin-bottom: 60px;
+    }
+}
+
+.project-info h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Chromatic aberration hover concept simulation */
+.glitch-hover {
+    position: relative;
+    transition: text-shadow 0.2s ease;
+}
+
+.portfolio-item:hover .glitch-hover {
+    text-shadow: 
+        -1.5px -1.5px 0px rgba(0, 255, 204, 0.6), 
+         1.5px  1.5px 0px rgba(255, 0, 85, 0.6);
+}
+
+.project-info p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+/* ==========================================================================
+   7. SCROLL REVEAL TIMING ENGINES
+   ========================================================================== */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), 
+                transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   8. FOOTER BRAND DATA
+   ========================================================================== */
+footer {
+    padding: 100px 5%;
+    text-align: center;
+    background-color: #050505;
+}
+
+footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; }
+
+.email-link {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   9. DYNAMIC LOCAL MEDIA LIGHTBOX MODAL
+   ========================================================================== */
+.lightbox {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.lightbox-content {
+    width: 90%;
+    max-width: 1000px;
+    aspect-ratio: 16 / 9;
+    z-index: 10002;
+}
+
+.lightbox-content video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    outline: none;
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 30px; right: 40px;
+    background: none; border: none;
+    color: #fff; font-size: 3rem;
+    z-index: 10005;
+}
+
+/* ==========================================================================
+   10. CUSTOM MOUSE CURSOR PHYSICS ENGINES
+   ========================================================================== */
+.custom-cursor {
+    width: 12px;
+    height: 12px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 20000;
+    transition: opacity 0.2s ease;
+}
+
+.custom-cursor-follower {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 19999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: left 0.12s cubic-bezier(0.25, 1, 0.5, 1), 
+                top 0.12s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.2s ease,
+                width 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+                height 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+                border-color 0.3s, background-color 0.3s;
+}
+
+.follower-text {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #ffffff;
+    opacity: 0;
+    transform: scale(0.7);
+    transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Custom interactive hover state mutations */
+body.hovering-portfolio .custom-cursor {
+    opacity: 0;
+}
+
+body.hovering-portfolio .custom-cursor-follower {
+    width: 90px;
+    height: 90px;
+    border: 1.5px solid #ffffff;
+    background-color: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    z-index: 20001;
+}
+
+body.hovering-portfolio .follower-text {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ==========================================================================
+   11. ASYMMETRICAL ABOUT SPLIT SECTION
+   ========================================================================== */
+.about-split {
+    padding: 140px 5%;
+    background-color: #0a0a0a;
+    border-top: 1px solid #1a1a1a;
+}
+
+.split-container {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr; /* Asymmetric grid favoring the image */
+    gap: 80px;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.split-left {
+    width: 100%;
+}
+
+.image-frame {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    aspect-ratio: 3 / 4; /* Perfect container layout for vertical group photos */
+    background-color: #111;
+}
+
+.team-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%) contrast(105%);
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.image-frame:hover .team-img {
+    transform: scale(1.03);
+}
+
+.split-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.about-content {
+    max-width: 480px;
+}
+
+.section-tag {
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 20px;
+}
+
+.split-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin-bottom: 25px;
+    line-height: 1.1;
+}
+
+.split-text {
+    color: #a0a0a0;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    letter-spacing: 0.2px;
+}
+
+/* Responsive collapse pattern for mobile layout blocks */
+@media (max-width: 900px) {
+    .about-split {
+        padding: 80px 5%;
+    }
+    .split-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .about-content {
+        max-width: 100%;
+    }
+}
+
+/* ==========================================================================
+   12. ALTERNATING SPLIT STACK DESIGN (TEXT LEFT / VIDEO RIGHT)
+   ========================================================================== */
+.about-split.alt-stack {
+    border-top: none;
+    padding-top: 0; /* Tightens the vertical rhythm between both split blocks */
+}
+
+/* On desktop viewports, flip the grid items so text renders first on the left */
+@media (min-width: 901px) {
+    .about-split.alt-stack .split-container {
+        grid-template-columns: 0.9fr 1.1fr; /* Flips asymmetric weight to the right video */
+    }
+    .about-split.alt-stack .split-left {
+        order: 1;
+    }
+    .about-split.alt-stack .split-right {
+        order: 2;
+    }
+}
+
+.bold-lead {
+    font-weight: 700;
+    color: var(--text-color) !important;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+}
+
+.video-frame {
+    aspect-ratio: 16 / 9; /* Traditional video frame landscape layout */
+}
+
+
+.showcase-loop {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+    /* Enforces aggressive high-contrast grayscale to blend perfectly into the layout */
+    filter: grayscale(100%) contrast(125%) brightness(90%);
+    mix-blend-mode: luminosity;
+    
+    /* Premium subtle zooming breathe animation to make it feel deliberate and expensive */
+    animation: rhythmic-breathe 10s ease-in-out infinite alternate;
+}
+
+@keyframes rhythmic-breathe {
+    0% { 
+        transform: scale(1); 
+        filter: grayscale(100%) contrast(125%) brightness(90%); 
+    }
+    100% { 
+        transform: scale(1.04); 
+        filter: grayscale(100%) contrast(135%) brightness(85%); 
+    }
+}
+
+/* ==========================================================================
+   1. GLOBAL RESETS & PALETTE DEFINITIONS
+   ========================================================================== */
+:root {
+    --bg-color: #0a0a0a;
+    --text-color: #ffffff;
+    --text-muted: #707070;
+    --font-sans: 'Helvetica Neue', Arial, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Clear default OS cursor so custom physics node tracks exclusively */
+html, body, a, button, .portfolio-item {
+    cursor: none !important;
+}
+
+/* ==========================================================================
+   2. GRANULAR BRAND TEXTURING (FILM GRAIN)
+   ========================================================================== */
+.noise-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* ==========================================================================
+   3. NAVIGATION UI
+   ========================================================================== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 5%;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+}
+
+.brand-mono {
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+
+.nav-cta {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--text-color);
+    padding-bottom: 2px;
+    transition: opacity 0.3s ease;
+}
+
+.nav-cta:hover { 
+    opacity: 0.6; 
+}
+
+/* ==========================================================================
+   4. TITLE REVEAL ENGINES (HERO MASKING)
+   ========================================================================== */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 20px;
+    background: radial-gradient(circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 100%), #0a0a0a;
+    transition: background 0.1s ease-out;
+}
+
+.hero-metadata {
+    position: absolute;
+    font-family: monospace;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    opacity: 0.4;
+    text-transform: uppercase;
+}
+
+.hero-metadata.top-left     { top: 40px; left: 5%; }
+.hero-metadata.top-right    { top: 40px; right: 5%; }
+.hero-metadata.bottom-left  { bottom: 40px; left: 5%; }
+.hero-metadata.bottom-right { bottom: 40px; right: 5%; }
+
+.hero-logo {
+    max-width: 280px;
+    height: auto;
+    margin-bottom: 40px;
+    mix-blend-mode: screen;
+}
+
+.tagline {
+    font-size: clamp(1.8rem, 4vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.2;
+}
+
+.reveal-wrapper {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+}
+
+.reveal-text {
+    display: inline-block;
+    transform: translateY(100%);
+    animation: revealUp 1.2s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.delay-1 {
+    animation-delay: 0.2s;
+}
+
+@keyframes revealUp {
+    0% { transform: translateY(100%); }
+    100% { transform: translateY(0); }
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   5. BRAND MANIFESTO BRANDING
+   ========================================================================== */
+.manifesto {
+    padding: 140px 5%;
+    text-align: center;
+    border-top: 1px solid #1a1a1a;
+}
+
+.statement {
+    font-size: 0.85rem;
+    letter-spacing: 6px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+.sub-statement {
+    font-size: clamp(2rem, 6vw, 5rem);
+    font-weight: 900;
+    letter-spacing: -2px;
+}
+
+/* ==========================================================================
+   6. PORTFOLIO MEDIA GRID (LOCKED 2-COLUMN ROWS)
+   ========================================================================== */
+.portfolio {
+    padding: 0 5% 140px 5%;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Enforces exactly two elements side-by-side */
+    gap: 80px 50px;
+}
+
+/* Editorial layout stagger for desktop viewports */
+@media (min-width: 769px) {
+    .portfolio-item:nth-child(even) {
+        transform: translateY(60px);
+    }
+}
+
+/* Collapse layout parameters cleanly on mobile devices */
+@media (max-width: 600px) {
+    .grid-container { 
+        grid-template-columns: 1fr; 
+    }
+    .portfolio-item:nth-child(even) {
+        transform: none;
+    }
+}
+
+.portfolio-item {
+    display: block;
+}
+
+.thumbnail-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #111;
+    overflow: hidden;
+}
+
+.thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.thumbnail-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 5;
+    transition: background-color 0.3s ease;
+}
+
+.portfolio-item:hover .thumbnail {
+    transform: scale(1.04);
+}
+
+.portfolio-item:hover .thumbnail-overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.project-info {
+    margin-top: 15px;
+}
+
+@media (min-width: 769px) {
+    .portfolio-item:nth-child(even) .project-info {
+        margin-bottom: 60px;
+    }
+}
+
+.project-info h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Chromatic aberration hover concept simulation */
+.glitch-hover {
+    position: relative;
+    transition: text-shadow 0.2s ease;
+}
+
+.portfolio-item:hover .glitch-hover {
+    text-shadow: 
+        -1.5px -1.5px 0px rgba(0, 255, 204, 0.6), 
+         1.5px  1.5px 0px rgba(255, 0, 85, 0.6);
+}
+
+.project-info p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+/* ==========================================================================
+   7. SCROLL REVEAL TIMING ENGINES
+   ========================================================================== */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), 
+                transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   8. FOOTER BRAND DATA
+   ========================================================================== */
+footer {
+    padding: 100px 5%;
+    text-align: center;
+    background-color: #050505;
+}
+
+footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; }
+
+.email-link {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   9. DYNAMIC LOCAL MEDIA LIGHTBOX MODAL
+   ========================================================================== */
+.lightbox {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.lightbox-content {
+    width: 90%;
+    max-width: 1000px;
+    aspect-ratio: 16 / 9;
+    z-index: 10002;
+}
+
+.lightbox-content video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    outline: none;
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 30px; right: 40px;
+    background: none; border: none;
+    color: #fff; font-size: 3rem;
+    z-index: 10005;
+}
+
+/* ==========================================================================
+   10. CUSTOM MOUSE CURSOR PHYSICS ENGINES
+   ========================================================================== */
+.custom-cursor {
+    width: 12px;
+    height: 12px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 20000;
+    transition: opacity 0.2s ease;
+}
+
+.custom-cursor-follower {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 19999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: left 0.12s cubic-bezier(0.25, 1, 0.5, 1), 
+                top 0.12s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.2s ease,
+                width 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+                height 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+                border-color 0.3s, background-color 0.3s;
+}
+
+.follower-text {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #ffffff;
+    opacity: 0;
+    transform: scale(0.7);
+    transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Custom interactive hover state mutations */
+body.hovering-portfolio .custom-cursor {
+    opacity: 0;
+}
+
+body.hovering-portfolio .custom-cursor-follower {
+    width: 90px;
+    height: 90px;
+    border: 1.5px solid #ffffff;
+    background-color: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    z-index: 20001;
+}
+
+body.hovering-portfolio .follower-text {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ==========================================================================
+   11. ASYMMETRICAL ABOUT SPLIT SECTION
+   ========================================================================== */
+.about-split {
+    padding: 140px 5%;
+    background-color: #0a0a0a;
+    border-top: 1px solid #1a1a1a;
+}
+
+.split-container {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr; /* Asymmetric grid favoring the image */
+    gap: 80px;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.split-left {
+    width: 100%;
+}
+
+.image-frame {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    aspect-ratio: 3 / 4; /* Perfect container layout for vertical group photos */
+    background-color: #111;
+}
+
+.team-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%) contrast(105%);
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.image-frame:hover .team-img {
+    transform: scale(1.03);
+}
+
+.split-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.about-content {
+    max-width: 480px;
+}
+
+.section-tag {
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 20px;
+}
+
+.split-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin-bottom: 25px;
+    line-height: 1.1;
+}
+
+.split-text {
+    color: #a0a0a0;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    letter-spacing: 0.2px;
+}
+
+/* Responsive collapse pattern for mobile layout blocks */
+@media (max-width: 900px) {
+    .about-split {
+        padding: 80px 5%;
+    }
+    .split-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .about-content {
+        max-width: 100%;
+    }
+}
+
+/* ==========================================================================
+   12. ALTERNATING SPLIT STACK DESIGN (TEXT LEFT / VIDEO RIGHT)
+   ========================================================================== */
+.about-split.alt-stack {
+    border-top: none;
+    padding-top: 0; /* Tightens the vertical rhythm between both split blocks */
+}
+
+/* On desktop viewports, flip the grid items so text renders first on the left */
+@media (min-width: 901px) {
+    .about-split.alt-stack .split-container {
+        grid-template-columns: 0.9fr 1.1fr; /* Flips asymmetric weight to the right video */
+    }
+    .about-split.alt-stack .split-left {
+        order: 1;
+    }
+    .about-split.alt-stack .split-right {
+        order: 2;
+    }
+}
+
+.bold-lead {
+    font-weight: 700;
+    color: var(--text-color) !important;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+}
+
+.video-frame {
+    aspect-ratio: 16 / 9; /* Traditional video frame landscape layout */
+}
+
+
+.showcase-loop {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+    /* Enforces aggressive high-contrast grayscale to blend perfectly into the layout */
+    filter: grayscale(100%) contrast(125%) brightness(90%);
+    mix-blend-mode: luminosity;
+    
+    /* Premium subtle zooming breathe animation to make it feel deliberate and expensive */
+    animation: rhythmic-breathe 10s ease-in-out infinite alternate;
+}
+
+@keyframes rhythmic-breathe {
+    0% { 
+        transform: scale(1); 
+        filter: grayscale(100%) contrast(125%) brightness(90%); 
+    }
+    100% { 
+        transform: scale(1.04); 
+        filter: grayscale(100%) contrast(135%) brightness(85%); 
+    }
+
+}
