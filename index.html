@@ -5,43 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TENFOUR | Creative Production Team</title>
     <link rel="icon" type="image/x-icon" href="tenfour-logo.ico">
+    <!-- Google Fonts for the A24 Editorial Serif Contrast -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="noise-overlay"></div>
 
+    <!-- GIGIL-Inspired Infinite Typographic Ribbon -->
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <span>BUILT, NOT BRAGGED // TENFOUR COLLECTIVE // BUILT, NOT BRAGGED // TENFOUR COLLECTIVE //&nbsp;</span>
+            <span>BUILT, NOT BRAGGED // TENFOUR COLLECTIVE // BUILT, NOT BRAGGED // TENFOUR COLLECTIVE //&nbsp;</span>
+        </div>
+    </div>
+
     <nav class="navbar">
         <span class="brand-mono">TENFOUR</span>
         <a href="mailto:tenfour.work@gmail.com" class="nav-cta">Get in Touch</a>
     </nav>
 
-    <!-- Hero Section -->
-        <section class="hero">
-            <!-- Film Slate Metadata Corner Anchors -->
-            <div class="hero-metadata top-left">SYS // BRDCST_04</div>
-            <div class="hero-metadata top-right" id="liveTimecode">00:00:00:00</div>
-            <div class="hero-metadata bottom-left">FPS // 23.976</div>
-            <div class="hero-metadata bottom-right">ASPECT // 2.39:1</div>
+    <!-- Refactored Interactive Hero Section -->
+    <section class="hero interactive-void-hero">
+        
+        <div class="hero-video-background">
+            <video autoplay loop muted playsinline poster="images/showreel-poster.jpg" class="hero-raw-stream">
+                <source src="https://res.cloudinary.com/dygn7hns1/video/upload/v1780325149/hanami_f0fbhf.mp4" type="video/mp4">
+            </video>
+            <div class="video-brutalist-tint"></div>
+        </div>
 
-            <div class="hero-content">
-                <img src="tenfour-logo.png" alt="tenfour logo" class="hero-logo">
-                <h1 class="tagline">
-                    <span class="reveal-wrapper">
-                        <span class="reveal-text" data-text="WE DON'T CHASE VIEWS.">WE DON'T CHASE VIEWS.</span>
-                    </span>
-                    <br>
-                    <span class="reveal-wrapper">
-                        <span class="reveal-text delay-1" data-text="WE BUILD THEM.">WE BUILD THEM.</span>
-                    </span>
-                </h1>
-            </div>
-            <div class="scroll-indicator">↓ SCROLL</div>
-        </section>
+        <div class="void-canvas-container">
+            <canvas id="voidCanvas"></canvas>
+        </div>
 
+        <div class="hero-metadata top-left">SYS // BRDCST_04</div>
+        <div class="hero-metadata top-right" id="liveTimecode">00:00:00:00</div>
+        <div class="hero-metadata bottom-left">FPS // 23.976</div>
+        <div class="hero-metadata bottom-right">ASPECT // 2.39:1</div>
+
+        <div class="hero-content void-overlay-content">
+            <h1 class="tagline interactive-tagline">
+                <span class="brand-title-large">TENF<span class="anamorphic-o">O</span>UR</span>
+                <span class="tagline-sub">WE DON'T CHASE VIEWS. WE BUILD THEM.</span>
+            </h1>
+        </div>
+        <div class="scroll-indicator">↓ SCROLL TO REEL INDEX</div>
+    </section>
+
+    <!-- Manifesto Section (Follows Hero)[cite: 1] -->
     <section class="manifesto">
         <p class="statement">CREATORS • ARTISTS • BRANDS</p>
-        <h2 class="sub-statement">BUILT, NOT BRAGGED.</h2>
+        <h2 class="sub-statement">
+            Built, <span>not bragged.</span>
+        </h2>
     </section>
 
     <section class="portfolio">
@@ -86,13 +106,13 @@
     <!-- About Split Section -->
     <section class="about-split">
         <div class="split-container">
-            <!-- Left Side: Image -->
+            <!-- Left Side: Image[cite: 1] -->
             <div class="split-left">
                 <div class="image-frame">
                     <img src="images/team.jpg" alt="TENFOUR Team" class="team-img">
                 </div>
             </div>
-            <!-- Right Side: Clean Copy -->
+            <!-- Right Side: Clean Copy[cite: 1] -->
             <div class="split-right">
                 <div class="about-content">
                     <span class="section-tag">01 // THE MEANING</span>
@@ -108,7 +128,7 @@
     <!-- About Split Section 2 (Alternating Stack: Text Left / Video Right) -->
     <section class="about-split alt-stack">
         <div class="split-container">
-            <!-- Left Side: Clean Manifesto Copy -->
+            <!-- Left Side: Clean Manifesto Copy[cite: 1] -->
             <div class="split-left">
                 <div class="about-content">
                     <span class="section-tag">02 // THE WARM-UP</span>
@@ -121,10 +141,9 @@
                     </p>
                 </div>
             </div>
-            <!-- Right Side: Silent Looping Video Element -->
+            <!-- Right Side: Silent Looping Video Element[cite: 1] -->
             <div class="split-right">
                 <div class="image-frame video-frame">
-                    <!-- TARGET THE NEW CLIPS HERE -->
                     <video class="showcase-loop" autoplay loop muted playsinline>
                         <source src="videos/introtrim.mp4" type="video/mp4">
                     </video>
@@ -133,6 +152,8 @@
             </div>
         </div>
     </section>
+
+    
 
     <footer>
         <p>Let's make something raw.</p>

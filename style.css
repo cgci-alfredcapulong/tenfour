@@ -344,15 +344,16 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; }
    10. CUSTOM MOUSE CURSOR PHYSICS ENGINES
    ========================================================================== */
 .custom-cursor {
-    width: 12px;
-    height: 12px;
+    width: 8px;
+    height: 8px;
     background-color: #ffffff;
     border-radius: 50%;
-    position: fixed;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 20000;
-    transition: opacity 0.2s ease;
+    position: fixed; /* Must be fixed to lock onto the viewport screen layer */
+    top: 0;
+    left: 0;
+    pointer-events: none; /* Prevents the custom cursor from blocking clicks to elements beneath it */
+    z-index: 9999;
+    will-change: transform;
 }
 
 .custom-cursor-follower {
@@ -361,19 +362,47 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; }
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
     position: fixed;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
     pointer-events: none;
     z-index: 19999;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    transition: left 0.12s cubic-bezier(0.25, 1, 0.5, 1), 
-                top 0.12s cubic-bezier(0.25, 1, 0.5, 1),
-                opacity 0.2s ease,
+    will-change: transform; /* Tells the GPU to handle this layer for flawless 60fps tracking */
+    
+    /* REMOVED top/left transitions to fix the glitching. 
+       Kept transitions only for structural styling adjustments (like scaling up on hover) */
+    transition: opacity 0.2s ease,
                 width 0.3s cubic-bezier(0.25, 1, 0.5, 1),
                 height 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-                border-color 0.3s, background-color 0.3s;
+                border-color 0.3s, 
+                background-color 0.3s;
+}
+
+/* --- The Text Frame Inner Styling --- */
+.follower-text {
+    font-family: monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: #fff;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.2s ease;
+}
+
+/* --- What happens when hovering over a Portfolio Video Item --- */
+.custom-cursor-follower.follower-active {
+    width: 80px; /* Expands into a larger button frame */
+    height: 80px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.8);
+    mix-blend-mode: difference; /* Inverts color over footage beautifully */
+}
+
+/* Reveal the "PLAY" text only when active */
+.custom-cursor-follower.follower-active .follower-text {
+    opacity: 1;
 }
 
 .follower-text {
@@ -1189,4 +1218,264 @@ body.hovering-portfolio .follower-text {
     94% { clip-path: inset(60% 0 10% 0); transform: translate(4px, 2px); }
     95% { clip-path: inset(25% 0 55% 0); transform: translate(-3px, -1px); }
     96% { clip-path: inset(85% 0 0% 0); transform: translate(2px, 1px); }
+}
+
+/* ==========================================================================
+   INTERACTIVE CREATIVE ADDITIONS (A24 + GIGIL ALIGNMENT)
+   ========================================================================== */
+
+/* --- Infinite Ticker Ribbon (GIGIL Style) --- */
+.ticker-wrap {
+    width: 100%;
+    overflow: hidden;
+    background: #0f0f0f;
+    border-bottom: 1px solid #1a1a1a;
+    padding: 12px 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.ticker {
+    display: inline-flex;
+    white-space: nowrap;
+    width: max-content; /* Critical: Prevents the container from collapsing */
+    animation: loopMarquee 15s linear infinite;
+}
+
+.ticker span {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-color);
+    opacity: 0.8;
+    display: inline-block;
+    padding-right: 0px; /* Controlled space via HTML &nbsp; or padding */
+}
+
+@keyframes loopMarquee {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        /* Translates exactly half of the total duplicated content width */
+        transform: translate3d(-50%, 0, 0); 
+    }
+}
+
+/* Offset navbar down slightly so it doesn't collide with our top banner ticker */
+.navbar {
+    padding: 65px 5% 30px 5%;
+}
+
+/* --- Refactored Typographic Manifesto (A24 Style Contrast) --- */
+.sub-statement {
+    font-size: clamp(2.5rem, 7vw, 6rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    line-height: 0.95;
+}
+
+.sub-statement span {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 400;
+    font-style: italic;
+    text-transform: lowercase;
+    letter-spacing: 0px;
+    padding-left: 5px;
+}
+
+/* ==========================================================================
+   REFOCUSED HERO IDENTITY VOID CANVAS
+   ========================================================================== */
+.interactive-void-hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 20px;
+    background-color: #0a0a0a;
+    overflow: hidden;
+}
+
+.void-canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+#voidCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.void-overlay-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    pointer-events: none; /* Mouse coordinates pass straight through to canvas */
+    mix-blend-mode: difference; /* Text color contrasts cleanly against floating nodes */
+}
+
+/* Big, aggressive branding lockup */
+.interactive-tagline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.brand-title-large {
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: 0.85;
+}
+
+.tagline-sub {
+    font-family: monospace;
+    font-size: clamp(0.75rem, 1.5vw, 1.1rem);
+    letter-spacing: 4px;
+    color: var(--text-color);
+    opacity: 0.7;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+/* ==========================================================================
+   AGAD SHOWCASE - FULL SCREEN HERO BACKGROUND VIDEO
+   ========================================================================== */
+.hero-video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Sits beneath the canvas and text layers */
+    overflow: hidden;
+}
+
+.hero-raw-stream {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Forces the footage to fill the viewport flawlessly */
+    
+    /* Apply an editorial color grade look to keep the text perfectly readable */
+    filter: brightness(35%) contrast(110%) saturate(85%);
+}
+
+/* Brutalist mesh tint to add a tactical monitor grain texture over the video */
+.video-brutalist-tint {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.4) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+}
+
+/* Ensure canvas sits directly on top of the moving footage */
+.void-canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    mix-blend-mode: screen; /* Blends the micro data code words dynamically with the background video clips */
+}
+
+.void-overlay-content {
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   HORIZONTAL SPLIT ABOUT TRACK ENGINE
+   ========================================================================== */
+.horizontal-scroll-container {
+    position: relative;
+    width: 100%;
+    /* Scroll length: 200vh gives a tight, fast pace for 2 sections */
+    height: 220vh; 
+    background-color: #0d0d0d;
+}
+
+.horizontal-sticky-window {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.horizontal-slides-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    will-change: transform;
+    height: 100%;
+}
+
+/* Force each of your split modules to become a widescreen film slide */
+.horizontal-slide-panel {
+    width: 100vw;
+    height: 100vh;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    /* Add a clean, brutalist panel slice separator between sections */
+    border-right: 1px solid #1a1a1a; 
+}
+
+/* Maintain your layout alignment styles while locked inside the slide panels */
+.horizontal-slide-panel .split-container {
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 5%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+/* Ensure mobile layouts safely fallback down to standard column scrolling */
+@media (max-width: 768px) {
+    .horizontal-scroll-container {
+        height: auto !important;
+    }
+    .horizontal-sticky-window {
+        position: relative !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+    .horizontal-slides-wrapper {
+        flex-direction: column !important;
+        transform: none !important;
+    }
+    .horizontal-slide-panel {
+        width: 100% !important;
+        height: auto !important;
+        padding: 60px 20px !important;
+    }
+    .horizontal-slide-panel .split-container {
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+    }
 }
