@@ -1128,3 +1128,65 @@ body.hovering-portfolio .follower-text {
     filter: brightness(0) saturate(0) invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
     transform: translateY(-2px);
 }
+
+/* ==========================================================================
+   ADVANCED CYBER GLITCH SYSTEM (MATCHING IMAGE_A88C43.PNG)
+   ========================================================================== */
+.tagline .reveal-text {
+    position: relative;
+    display: inline-block;
+    /* First animation slides it up; second animation loops the signal glitch */
+    animation: revealUp 1.2s cubic-bezier(0.76, 0, 0.24, 1) forwards, 
+               cyber-glitch 4s infinite linear;
+    animation-delay: 0s, 1.5s; /* Delays the loop so the intro finishes entirely */
+}
+
+/* Pseudo-layers utilizing the HTML data-text attribute */
+.tagline .reveal-text::before,
+.tagline .reveal-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color); /* Prevents the layer beneath from leaking through */
+    clip-path: inset(100% 0 0 0); /* Hidden until animation frame triggers */
+}
+
+/* Cyan layer: matching upper-left shift from image_a88c43.png */
+.tagline .reveal-text::before {
+    text-shadow: -1.5px -1.5px 0px rgba(0, 255, 204, 0.8);
+    animation: glitch-slice-1 4s infinite linear;
+    animation-delay: 1.5s; /* Kept in sync with master delay */
+}
+
+/* Red layer: matching bottom-right shift from image_a88c43.png */
+.tagline .reveal-text::after {
+    text-shadow: 1.5px 1.5px 0px rgba(255, 0, 85, 0.8);
+    animation: glitch-slice-2 4s infinite linear;
+    animation-delay: 1.5s; /* Kept in sync with master delay */
+}
+
+/* Master Text Container Stutter & Micro-contrast Frame Shifts */
+@keyframes cyber-glitch {
+    0%, 93%, 97%, 100% { transform: none; filter: none; }
+    94% { transform: skewX(-3deg); filter: brightness(1.2); }
+    95% { transform: skewX(3deg); }
+    96% { transform: skewY(1deg); filter: contrast(1.5); }
+}
+
+/* Dynamic clipping splits matching image positioning */
+@keyframes glitch-slice-1 {
+    0%, 93%, 97%, 100% { clip-path: inset(100% 0 0 0); }
+    94% { clip-path: inset(10% 0 65% 0); transform: translate(-4px, -2px); }
+    95% { clip-path: inset(40% 0 35% 0); transform: translate(3px, 1px); }
+    96% { clip-path: inset(5% 0 85% 0); transform: translate(-2px, -1px); }
+}
+
+@keyframes glitch-slice-2 {
+    0%, 93%, 97%, 100% { clip-path: inset(100% 0 0 0); }
+    94% { clip-path: inset(60% 0 10% 0); transform: translate(4px, 2px); }
+    95% { clip-path: inset(25% 0 55% 0); transform: translate(-3px, -1px); }
+    96% { clip-path: inset(85% 0 0% 0); transform: translate(2px, 1px); }
+}
