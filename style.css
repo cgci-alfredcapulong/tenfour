@@ -1107,3 +1107,24 @@ body.hovering-portfolio .follower-text {
     }
 
 }
+
+.social-links {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.social-icon {
+    width: 20px;
+    height: 20px;
+    /* This filter makes the black SVGs a muted gray */
+    filter: brightness(0) saturate(0) invert(44%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(95%) contrast(85%);
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon:hover {
+    /* Brightens to white on hover */
+    filter: brightness(0) saturate(0) invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+    transform: translateY(-2px);
+}
