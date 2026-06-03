@@ -1321,10 +1321,9 @@ body.hovering-portfolio .follower-text {
 
 .void-overlay-content {
     position: relative;
-    z-index: 2;
+    z-index: 3; /* Raised above the canvas layer */
     text-align: center;
     pointer-events: none; /* Mouse coordinates pass straight through to canvas */
-    mix-blend-mode: difference; /* Text color contrasts cleanly against floating nodes */
 }
 
 /* Big, aggressive branding lockup */

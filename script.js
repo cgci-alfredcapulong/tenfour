@@ -169,7 +169,7 @@ const initHeroVoidCanvas = () => {
             this.text = text;
             this.density = (Math.random() * 25) + 15;
             this.fontSize = Math.floor(Math.random() * 16) + 11;
-            this.opacity = Math.random() * 0.35 + 0.15;
+            this.opacity = Math.random() * 0.15 + 0.05;
         }
 
         draw() {
@@ -380,7 +380,7 @@ const initHeroFluidVoid = () => {
             // Random assignment of raw text snippet symbols
             this.text = characters[Math.floor(Math.random() * characters.length)];
             this.fontSize = Math.floor(Math.random() * 4) + 10; // Crisp, micro digital font sizing
-            this.opacity = Math.random() * 0.25 + 0.05; // Faint, subtle matrix grid aesthetic
+            this.opacity = Math.random() * 0.07 + 0.03; // Faint, subtle matrix grid aesthetic
             this.friction = Math.random() * 0.05 + 0.85; // Drag variable for organic kinetic inertia
             this.ease = Math.random() * 0.05 + 0.05; // Spring-back home flexibility calculation
         }
