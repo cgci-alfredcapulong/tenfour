@@ -1531,3 +1531,86 @@ body.hovering-portfolio .follower-text {
 .tagline .reveal-text::after {
     animation-delay: 1.5s;
 }
+
+/* ==========================================================================
+   CINEMATIC SLATE PRELOADER SYSTEM
+   ========================================================================== */
+.preloader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0a0a0a;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Smooth cinematic exit fade */
+    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), 
+                visibility 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.preloader-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Minimalist Editorial Title (A24/Premium Production style) */
+.slate-branding {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: 12px;
+    text-transform: uppercase;
+    color: var(--text-color);
+    margin-right: -12px; /* Fixes tracking offset alignment */
+    animation: slate-breathe 3s ease-in-out infinite alternate;
+}
+
+/* Red recording dot monitor indicator */
+.slate-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.record-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #ff003c; /* Pure camera monitor red */
+    border-radius: 50%;
+    animation: record-blink 1s steps(2, start) infinite;
+}
+
+.status-text {
+    font-family: monospace;
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+/* Premium Animations */
+@keyframes slate-breathe {
+    0% { transform: scale(0.98); opacity: 0.6; }
+    100% { transform: scale(1.01); opacity: 1; }
+}
+
+@keyframes record-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Active transition state out */
+.preloader-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+body.loading-active {
+    overflow: hidden !important;
+}

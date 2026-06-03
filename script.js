@@ -555,3 +555,26 @@ const initScrollRevealLens = () => {
     handleLensScroll();
 };
 
+/* --- 7. CINEMATIC SLATE PRELOADER ENGINE --- */
+const initSystemPreloader = () => {
+    const preloader = document.getElementById('sitePreloader');
+    const statusText = document.querySelector('.status-text');
+    
+    if (!preloader) return;
+
+    // Halt scroll interactions during playback processing
+    document.body.classList.add('loading-active');
+
+    window.addEventListener('load', () => {
+        if (statusText) statusText.textContent = "SIGNAL READY";
+
+        // Deliberate frame beat holding before opening the sequence
+        setTimeout(() => {
+            preloader.classList.add('preloader-hidden');
+            document.body.classList.remove('loading-active');
+        }, 600);
+    });
+};
+
+// Execute preloader layout layer instantly
+initSystemPreloader();
