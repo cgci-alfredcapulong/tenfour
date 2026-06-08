@@ -1614,3 +1614,112 @@ body.hovering-portfolio .follower-text {
 body.loading-active {
     overflow: hidden !important;
 }
+
+/* ==========================================================================
+   CINEMATIC BRAND LOGO TICKER
+   ========================================================================== */
+.creators-marquee-section {
+    width: 100%;
+    background-color: #050505;
+    padding: 55px 0;
+    border-top: 1px solid #111111;
+    border-bottom: 1px solid #111111;
+    position: relative;
+    overflow: hidden;
+    z-index: 5;
+}
+
+.marquee-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.marquee-title-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 4%;
+}
+
+.marquee-indicator {
+    width: 6px;
+    height: 6px;
+    background-color: #ff003c;
+    border-radius: 50%;
+}
+
+.marquee-section-title {
+    font-family: monospace;
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-muted, #707070);
+}
+
+.marquee-track-container {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+}
+
+/* Container hosting both cloned groups side-by-side */
+.marquee-track {
+    display: flex;
+    width: max-content;
+    animation: logo-marquee-left 30s linear infinite;
+    will-change: transform; /* Bypasses the CPU for silky smooth 60fps tracking */
+}
+
+.marquee-group {
+    display: flex;
+    align-items: center;
+    gap: 90px; /* Generous breathing space between marks */
+    padding-right: 90px; /* Matches the gap size exactly to prevent stutter steps */
+}
+
+/* Unified Logo Boxing - Scaled Up for Visual Clarity */
+.brand-logo-card {
+    height: 65px;      /* Increased from 38px to give vertical space */
+    width: 160px;      /* Increased from 100px so wide logos don't squash */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand-logo-card img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    /* Subtle contrast tuning - boosted baseline opacity from 0.4 to 0.6 */
+    filter: grayscale(100%) brightness(0.8) contrast(1.1);
+    opacity: 0.6; 
+    transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover highlights the asset to crystal-clear full visibility */
+.brand-logo-card:hover img {
+    filter: grayscale(0%) brightness(1) contrast(1);
+    opacity: 1;
+    transform: scale(1.08); /* Adds a premium cinematic lift on hover */
+}
+
+/* Pause scroll behavior smoothly when interacting with items */
+.marquee-track-container:hover .marquee-track {
+    animation-play-state: paused;
+}
+
+/* ==========================================================================
+   PERFECT INFINITE TRANSLATION ENGINE
+   ========================================================================== */
+@keyframes logo-marquee-left {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        /* Translates exactly halfway down the dual-cloned length track */
+        transform: translate3d(-50%, 0, 0);
+    }
+}
