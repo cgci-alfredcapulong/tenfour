@@ -1723,3 +1723,180 @@ body.loading-active {
         transform: translate3d(-50%, 0, 0);
     }
 }
+
+/* ==========================================================================
+   CINEMATIC MEETINGS BOOKING NATIVE LAYOUT
+   ========================================================================== */
+.booking-system-section {
+    width: 100%;
+    background-color: #050505;
+    padding: 100px 4%;
+    border-top: 1px solid #111;
+    position: relative;
+    z-index: 5;
+}
+
+.booking-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: flex-start;
+}
+
+.booking-meta-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    position: sticky;
+    top: 120px;
+}
+
+.booking-meta-panel .meta-tag {
+    font-family: monospace;
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.booking-header {
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 900;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    line-height: 0.95;
+    color: #fff;
+}
+
+.booking-desc {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.slate-data-row {
+    margin-top: 20px;
+    border-top: 1px solid #141414;
+    padding-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.data-block {
+    display: flex;
+    justify-content: space-between;
+    font-family: monospace;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+}
+
+.data-block .label {
+    color: #444;
+}
+
+.data-block .val {
+    color: #fff;
+}
+
+/* Native Brutalist Form Framework */
+.booking-form-window {
+    width: 100%;
+    background-color: #0a0a0a;
+    border: 1px solid #141414;
+    padding: 40px;
+}
+
+.native-brutalist-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-label {
+    font-family: monospace;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+}
+
+.native-brutalist-form input,
+.native-brutalist-form select,
+.native-brutalist-form textarea {
+    width: 100%;
+    background-color: #0e0e0e;
+    border: 1px solid #1f1f1f;
+    padding: 14px 18px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Calendar widget structural color modifications */
+.native-brutalist-form input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.5;
+}
+
+.native-brutalist-form input:focus,
+.native-brutalist-form select:focus,
+.native-brutalist-form textarea:focus {
+    outline: none;
+    border-color: #ffffff;
+    background-color: #121212;
+}
+
+/* Styled Submitting Trigger Mechanism */
+.form-submit-btn {
+    width: 100%;
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    padding: 16px;
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.form-submit-btn:hover {
+    background-color: #ff003c; /* Changes to camera record red on hover triggers */
+    color: #ffffff;
+}
+
+/* Responsive adjustments for mid-tier configurations */
+@media (max-width: 992px) {
+    .booking-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    .booking-meta-panel {
+        position: relative;
+        top: 0;
+    }
+    .booking-form-window {
+        padding: 25px;
+    }
+    .form-input-row {
+        grid-template-columns: 1fr;
+    }
+}

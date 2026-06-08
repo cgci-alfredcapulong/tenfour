@@ -200,6 +200,59 @@
         </div>
     </section>
 
+
+    <section class="booking-system-section">
+        <div class="booking-grid">
+            <div class="booking-meta-panel">
+                <div class="meta-tag"><span class="record-dot"></span> DIRECT TRANSMISSION</div>
+                <h3 class="booking-header">START THE<br>SEQUENCE</h3>
+                <p class="booking-desc">Submit your project parameters below. Our pipeline will instantly analyze the data stream and generate a direct Google Meet calendar brief sent straight to your inbox.</p>
+                
+                <div class="slate-data-row">
+                    <div class="data-block"><span class="label">CHANNEL:</span><span class="val">SECURE SEC_INBOUND</span></div>
+                    <div class="data-block"><span class="label">TARGET LINK:</span><span class="val">AUTO_GOOGLE_MEET</span></div>
+                </div>
+            </div>
+            
+            <div class="booking-form-window">
+                <form action="https://formspree.io/f/xoqzvwde" method="POST" class="native-brutalist-form">
+                    <div class="form-input-group">
+                        <label class="form-label">01 // CREATOR_NAME</label>
+                        <input type="text" name="name" required placeholder="Who is directing this project?">
+                    </div>
+                    
+                    <div class="form-input-group">
+                        <label class="form-label">02 // DIGITAL_INBOX (EMAIL)</label>
+                        <input type="email" name="email" required placeholder="Where should we broadcast the briefing link?">
+                    </div>
+                    
+                    <div class="form-input-row">
+                        <div class="form-input-group">
+                            <label class="form-label">03 // INTENDED_DATE</label>
+                            <input type="date" name="preferred_date" required>
+                        </div>
+                        <div class="form-input-group">
+                            <label class="form-label">04 // SESSION_WINDOW</label>
+                            <select name="preferred_time" required>
+                                <option value="" disabled selected>Select a slot</option>
+                                <option value="morning">Morning (09:00 - 12:00)</option>
+                                <option value="afternoon">Afternoon (13:00 - 17:00)</option>
+                                <option value="night">After-Hours (18:00 - 21:00)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-input-group">
+                        <label class="form-label">05 // PROJECT_BRIEF_PARAMETERS</label>
+                        <textarea name="message" rows="4" required placeholder="Describe the raw vision, runtime, assets, or deliverables..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="form-submit-btn">TRANSMIT DIRECTIVE</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
     
 
     <footer>
